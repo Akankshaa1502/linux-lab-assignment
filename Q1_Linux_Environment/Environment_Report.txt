@@ -1,0 +1,37 @@
+=== Username and Groups ===
+codespace
+uid=1000(codespace) gid=1000(codespace) groups=1000(codespace),985(pipx),986(python),987(oryx),988(golang),989(docker),990(sdkman),991(rvm),992(php),993(conda),994(nvs),995(nvm),996(hugo),1001(ssh)
+Explanation: whoami confirmed the logged-in user, and id showed UID, GID, and group memberships.
+
+=== Current Shell ===
+/bin/bash
+Explanation: echo SHELL displayed the default login shell, /bin/bash.
+
+=== Working Directory ===
+/workspaces/linux-lab-assignment/Q1_Linux_Environment
+Explanation: pwd printed the current absolute directory path.
+
+=== Files in Workspace ===
+total 16
+drwxrwxrwx+ 3 codespace codespace 4096 Jul  2 07:48 .
+drwxrwxrwx+ 8 codespace root      4096 Jul  1 16:18 ..
+-rw-rw-rw-  1 codespace codespace  695 Jul  2 07:48 Environment_Report.txt
+drwxrwxrwx+ 2 codespace codespace 4096 Jul  1 16:18 screenshots
+Explanation: ls -la listed all files and folders including hidden ones with permissions.
+
+=== Network Connectivity ===
+Note: ping is blocked in Codespaces, curl was used instead.
+HTTP/2 301 
+location: https://www.google.com/
+content-type: text/html; charset=UTF-8
+content-security-policy-report-only: object-src 'none';base-uri 'self';script-src 'nonce-9ot6iDabF4I4egzp5b-q-Q' 'strict-dynamic' 'report-sample' 'unsafe-eval' 'unsafe-inline' https: http:;report-uri https://csp.withgoogle.com/csp/gws/other-hp
+date: Thu, 02 Jul 2026 07:48:31 GMT
+expires: Sat, 01 Aug 2026 07:48:31 GMT
+cache-control: public, max-age=2592000
+server: gws
+content-length: 220
+x-xss-protection: 0
+x-frame-options: SAMEORIGIN
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+
+Explanation: curl -I confirmed HTTPS connectivity via response headers from google.com.
