@@ -1,0 +1,18 @@
+STORAGE HEALTH ASSESSMENT REPORT
+==================================
+1. Available Storage Devices:
+lsblk showed the block devices available in this environment. In a Codespaces container, block-level device listing is limited/virtualized since it runs on shared cloud infrastructure rather than exposing raw physical disks.
+2. Mounted File Systems:
+df -hT and mount showed the filesystems currently mounted, including the root overlay filesystem used by the container.
+3. Disk Usage Statistics:
+df -h showed total, used, and available space per filesystem in human-readable form. The root filesystem usage was observed to be within normal range.
+4. Inode Utilization:
+df -i showed inode counts and usage percentage per filesystem, confirming inode availability was not a bottleneck.
+5. Storage Health Observations:
+No filesystem was found above 80% usage. Inode utilization was low, meaning file creation is not currently constrained. The environment appears healthy for deploying a new application.
+6. Recommendations for Improving Storage Utilization:
+- Set up automated monitoring/alerts when disk usage crosses 80%.
+- Regularly clean temporary files and old logs (e.g. /tmp, /var/log).
+- Consider using LVM or resizable cloud volumes for flexible scaling.
+- Archive or offload infrequently accessed data to reduce inode/disk pressure.
+- Periodically audit large files/directories using tools like du -sh.
