@@ -1,0 +1,27 @@
+]633;E;echo "=== Directory Structure Created ===";3ac3d124-5eb8-4be7-aa73-9ed4738470b1]633;C=== Directory Structure Created ===
+ProjectWorkspace
+ProjectWorkspace/docs
+ProjectWorkspace/data
+ProjectWorkspace/src
+Explanation: mkdir -p created a parent folder ProjectWorkspace with three subfolders (docs, src, data) in a single command.
+
+=== File Permissions Before Modification ===
+Initial permissions were the default (drwxrwxrwx, i.e. 777) since Codespaces containers create folders with open access by default.
+
+=== File Permissions After Modification ===
+drwxr-x---+ 5 codespace codespace 4096 Jul  2 08:11 ProjectWorkspace
+Explanation: chmod 750 restricted ProjectWorkspace to rwx for owner, r-x for group, and no access for others, tightening security.
+
+=== Ownership Details ===
+total 12
+drwxrwxrwx+ 2 codespace codespace 4096 Jul  2 08:11 data
+drwxrwxrwx+ 2 codespace codespace 4096 Jul  2 08:11 docs
+drwxrwxrwx+ 2 codespace codespace 4096 Jul  2 08:11 src
+Explanation: sudo chown -R codespace:codespace explicitly set the owner and group for ProjectWorkspace and its contents to codespace.
+
+=== Umask Value ===
+0022
+Explanation: umask 0022 means new files are created with permissions 644 and new directories with 755 by default, subtracted from the maximum 666/777.
+
+=== How Permissions Protect Project Data ===
+Restricting ProjectWorkspace to 750 ensures only the owner has full read/write/execute access, the group can view and enter but not modify, and all other users are completely blocked. Correct ownership (codespace:codespace) ensures the right user/group controls the files. Together, this prevents unauthorized users from reading, altering, or deleting sensitive project files while still allowing legitimate collaborators (the group) limited access.
