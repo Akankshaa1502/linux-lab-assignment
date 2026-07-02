@@ -1,0 +1,20 @@
+]633;E;echo "=== Inode Numbers ===";3ac3d124-5eb8-4be7-aa73-9ed4738470b1]633;C=== Inode Numbers ===
+original.txt (before deletion): 1310821
+hardlink.txt: 1310821 (same as original)
+symlink.txt: 1310822 (different - own inode)
+
+=== Comparison: Hard Link vs Symbolic Link ===
+A hard link shares the exact same inode number as the original file - it is essentially a second name pointing to the same data on disk. Its link count increases with each hard link created.
+A symbolic link has its own separate inode and simply stores the path/name of the target file as text data. It does not share the target's inode or link count.
+
+=== Effect of Deleting the Original ===
+After running rm original.txt:
+- hardlink.txt still opened successfully via cat, printing the original content, because the underlying data (inode 1310821) is not removed as long as at least one link (name) still references it. Its link count dropped from 2 to 1.
+- symlink.txt became a broken/dangling link. cat symlink.txt failed with 'No such file or directory' because the symlink only stored the path 'original.txt', which no longer exists.
+
+=== Metadata Collected (stat) ===
+original.txt/hardlink.txt: Size 26 bytes, Links: 2 (before deletion), regular file
+symlink.txt: Size 12 bytes (length of the path string 'original.txt'), Links: 1, type symbolic link
+
+=== Conclusions ===
+Hard links are resilient to the original filename being deleted because they reference the same inode/data directly - the data is only truly removed when its link count reaches zero. Symbolic links are more fragile because they only store a path reference; if that path becomes invalid, the symlink breaks even though it still physically exists as a small file. This demonstrates that Linux files are fundamentally identified by inode, not by filename - filenames are just labels (directory entries) pointing to inodes.
